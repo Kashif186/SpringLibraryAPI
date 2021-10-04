@@ -2,9 +2,12 @@ package com.qa.main.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.qa.main.domain.Book;
 import com.qa.main.repo.BookRepo;
 
+@Service
 public class BookService {
 
 	private BookRepo repo;
