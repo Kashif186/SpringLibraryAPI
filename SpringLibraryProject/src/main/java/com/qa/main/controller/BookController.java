@@ -22,6 +22,11 @@ public class BookController {
 
 	private BookService service;
 	
+	public BookController(BookService service) {
+		super();
+		this.service = service;
+	}
+
 	//http://localhost:9003/library/	
 	
 	//CREATE
