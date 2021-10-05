@@ -16,7 +16,7 @@ import com.qa.main.domain.Book;
 import com.qa.main.repo.BookRepo;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BookServiceTest {
+public class BookServiceUnitTest {
 
 	@InjectMocks
 	private BookService service;

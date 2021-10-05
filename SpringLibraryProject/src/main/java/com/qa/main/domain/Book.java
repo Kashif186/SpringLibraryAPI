@@ -27,6 +27,14 @@ public class Book {
 	public Book() {
 		super();
 	}
+	
+
+	public Book(String title, String author, int totalPages) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.totalPages = totalPages;
+	}
 
 	public Book(Long id, String title, String author) {
 		super();

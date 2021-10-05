@@ -31,32 +31,32 @@ public class BookController {
 	
 	//CREATE
 	@PostMapping("/createBook")
-	public Book createBook(@RequestBody Book book){
-		return this.service.createBook(book);
+	public ResponseEntity<Book> createBook(@RequestBody Book book){
+		return new ResponseEntity<Book>(this.service.createBook(book), HttpStatus.CREATED);
 	}
 	
 	
 	//READALL
 	@GetMapping("/getAllBooks")
-	public List<Book> getAllBooks(){
-		return this.service.getAllBooks();
+	public ResponseEntity<List<Book>> getAllBooks(){
+		return new ResponseEntity<List<Book>>(this.service.getAllBooks(), HttpStatus.OK);
 	}
 	
 	//READ
 	@GetMapping("/getBook/{id}")
-	public Book getBook(@PathVariable Long id) {
-		return this.service.getBook(id);
+	public ResponseEntity<Book> getBook(@PathVariable Long id) {
+		return new ResponseEntity<Book>(this.service.getBook(id), HttpStatus.OK);
 	}
 	
 	//UPDATE
 	@PutMapping("/updateBook/{id}")
-	public Book updateBook(@PathVariable Long id,@RequestBody Book updatedBook) {
-		return this.service.updateBook(id, updatedBook);
+	public ResponseEntity<Book> updateBook(@PathVariable Long id,@RequestBody Book updatedBook) {
+		return new ResponseEntity<Book>(this.service.updateBook(id, updatedBook), HttpStatus.ACCEPTED);
 	}
 
 	//DELETE
 	@DeleteMapping("/deleteBook/{id}")
-	public boolean deleteBook(@PathVariable Long id) {
-		return this.service.deleteBook(id);
+	public ResponseEntity<Boolean> deleteBook(@PathVariable Long id) {
+		return new ResponseEntity<Boolean>(this.service.deleteBook(id), HttpStatus.OK);
 	}
 }

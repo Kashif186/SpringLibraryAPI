@@ -15,7 +15,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
 @RunWith(MockitoJUnitRunner.class)
-public class BookTest {
+public class BookUnitTest {
 	
 	@InjectMocks
 	private Book book;
