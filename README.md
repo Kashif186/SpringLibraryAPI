@@ -9,7 +9,7 @@ This Spring Boot API uses:
 * Postman to make API calls which can be checked in Workbench
 
 
-I expect the challenge to go well as the MVP was covered in our training so I had a good idea of what needed to be done before starting.
+I expected the challenge to go well as the MVP was covered in our training so I had a good idea of what needed to be done before starting.
 
 Setting up the classes such as domain, repo, services and controller went really well. I had no issues here. However, I ran into a lot of issues with testing and received a lot of bugs. I had to research these and see what I was doing wrong but managed to solve them all in the end.
 
