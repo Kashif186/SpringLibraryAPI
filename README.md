@@ -1,4 +1,4 @@
-#Spring Library Project
+# Spring Library Project
 
 The overall objective of the project is the following:
 To create a Spring Boot API, with utilisation of supporting tools, methodologies, and technologies, that encapsulates all fundamental and practical modules.
@@ -15,36 +15,36 @@ Setting up the classes such as domain, repo, services and controller went really
 
 Testing will be a lot easier in the future as I have become familiar with the bugs that I encountered. I could add more tables to my project and expand the usage of the application as a whole. Also, I could learn about implementing a front end and linking it to my project.
 
-##Create:
+## Create:
 On Postman:
 ![Postman Create](/images/postman-create.png)
 On Workbench:
 ![Workbench Create](/images/workbench-create.png)
 
-##Get All:
+## Get All:
 On Postman:
 ![Postman GetAll](/images/postman-getall.png)
 On Workbench:
 ![Workbench GetAll](/images/workbench-getall.png)
 
-##Get:
+## Get:
 On Postman:
 ![Postman Get](/images/postman-get.png)
 
-##Update:
+## Update:
 On Postman:
 ![Postman Update](/images/postman-update.png)
 On Workbench:
 ![Workbench Update](/images/workbench-update.png)
 
-##Delete:
+## Delete:
 On Postman:
 ![Postman Delete](/images/postman-delete.png)
 On Workbench:
 ![Workbench Delete](/images/workbench-delete.png)
 
-##Testing:
-###Unit Tests
+## Testing:
+### Unit Tests
 Controller Unit Test:
 ![Controller Unit](/images/controller-unit-test.png)
 Domain Book Unit Test:
