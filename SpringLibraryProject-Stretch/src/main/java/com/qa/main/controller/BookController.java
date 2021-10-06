@@ -65,8 +65,8 @@ public class BookController {
 	
 	//FInd By Name
 	@GetMapping("/booktitle/{title}")
-	public ResponseEntity<List<Book>> findBytitle(@PathVariable String title){
-		return new ResponseEntity<List<Book>>(this.service.findBytitle(title), HttpStatus.OK);
+	public ResponseEntity<List<Book>> findByTitle(@PathVariable String title){
+		return new ResponseEntity<List<Book>>(this.service.findByTitle(title), HttpStatus.OK);
 	}
 	
 	@GetMapping("/findBookWithPagesLessThan/{number}")
@@ -91,6 +91,16 @@ public class BookController {
 			this.service.createBook(b);
 		}
 		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
+	}
+	
+	@PutMapping("/loanBook/{bookId}/{personId}")
+	public ResponseEntity<Book> loanBook(@PathVariable Long bookId,@PathVariable Long personId) {
+		return new ResponseEntity<Book>(this.service.loanBook(bookId, personId), HttpStatus.ACCEPTED);
+	}
+	
+	@PutMapping("/returnBook/{bookId}")
+	public ResponseEntity<Book> returnBook(@PathVariable Long bookId) {
+		return new ResponseEntity<Book>(this.service.returnBook(bookId), HttpStatus.ACCEPTED);
 	}
 	
 	

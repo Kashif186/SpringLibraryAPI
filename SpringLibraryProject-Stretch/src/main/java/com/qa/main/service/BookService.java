@@ -5,19 +5,24 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.qa.main.domain.Book;
+import com.qa.main.domain.Person;
 import com.qa.main.repo.BookRepo;
+import com.qa.main.repo.PersonRepo;
 
 @Service
 public class BookService {
 
 	private BookRepo repo;
+	private PersonRepo personRepo;
 	
-	public BookService(BookRepo repo) {
+	
+	public BookService(BookRepo repo, PersonRepo personRepo) {
 		super();
 		this.repo = repo;
+		this.personRepo = personRepo;
 	}
-	
-	
+
+
 	//CREATE
 	public Book createBook(Book book) {
 		return this.repo.saveAndFlush(book);
@@ -55,8 +60,8 @@ public class BookService {
 	
 	//STRETCH
 	
-	public List<Book> findBytitle(String title){
-		return this.repo.findBytitle(title);
+	public List<Book> findByTitle(String title){
+		return this.repo.findByTitle(title);
 	}
 	
 	public List<Book> findBooksWithPagesLessThan(int page){
@@ -71,7 +76,26 @@ public class BookService {
 		return this.repo.findBooksByPerson(id);
 	}
 	
+	public Book loanBook(Long bookId, Long personId) {
+		Person p = this.personRepo.findById(personId).get();
+		
+		if (this.repo.loanBook(bookId, p) == 1) {
+			return this.repo.findById(bookId).get();
+		} else {
+			return null;
+		}
+		
+		
+		
+	}
 	
+	public Book returnBook(Long bookId) {
+		if (this.repo.returnBook(bookId) == 1) {
+			return this.repo.findById(bookId).get();
+		} else {
+			return null; //throw custom exception here
+		}
+	}
 	
 
 }

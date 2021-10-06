@@ -18,8 +18,8 @@ public class PersonService {
 	}
 	
 	//CREATE
-	public Person createPerson(Person Person) {
-		return this.repo.saveAndFlush(Person);
+	public Person createPerson(Person person) {
+		return this.repo.saveAndFlush(person);
 	}
 
 	
