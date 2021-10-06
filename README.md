@@ -72,3 +72,10 @@ Service Unit Test:
 Jira Borad: https://kashif-butt.atlassian.net/jira/software/projects/SPRIN/boards/1
 
 GitHub: https://github.com/Kashif186/SpringLibraryProject
+
+
+##Stretch Goals:
+
+###ER Diagram
+
+![ER Diagram](/documentation/ER-Diagram.png)

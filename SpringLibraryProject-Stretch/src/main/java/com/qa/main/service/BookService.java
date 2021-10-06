@@ -51,5 +51,27 @@ public class BookService {
 		this.repo.deleteById(id);
 		return !this.repo.existsById(id);
 	}
+	
+	
+	//STRETCH
+	
+	public List<Book> findBytitle(String title){
+		return this.repo.findBytitle(title);
+	}
+	
+	public List<Book> findBooksWithPagesLessThan(int page){
+		return this.repo.findBooksWithPagesLessThan(page);
+	}
+	
+	public List<Book> findBooksWithPagesGreaterThan(int page){
+		return this.repo.findBooksWithPagesGreaterThan(page);
+	}
+	
+	public List<Book> findBooksByPerson(Long id){
+		return this.repo.findBooksByPerson(id);
+	}
+	
+	
+	
 
 }
