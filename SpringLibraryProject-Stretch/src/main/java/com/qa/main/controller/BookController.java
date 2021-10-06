@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.main.domain.Book;
+
 import com.qa.main.service.BookService;
 
 @RestController
@@ -59,4 +60,39 @@ public class BookController {
 	public ResponseEntity<Boolean> deleteBook(@PathVariable Long id) {
 		return new ResponseEntity<Boolean>(this.service.deleteBook(id), HttpStatus.OK);
 	}
+	
+	//STRETCH
+	
+	//FInd By Name
+	@GetMapping("/booktitle/{title}")
+	public ResponseEntity<List<Book>> findBytitle(@PathVariable String title){
+		return new ResponseEntity<List<Book>>(this.service.findBytitle(title), HttpStatus.OK);
+	}
+	
+	@GetMapping("/findBookWithPagesLessThan/{number}")
+	public ResponseEntity<List<Book>> findBooksWithPagesLessThan(@PathVariable int number){
+		return new ResponseEntity<List<Book>>(this.service.findBooksWithPagesLessThan(number), HttpStatus.OK);
+	}
+	
+	@GetMapping("/findBooksWithPagesGreaterThan/{number}")
+	public ResponseEntity<List<Book>> findBooksWithPagesGreaterThan(@PathVariable int number){
+		return new ResponseEntity<List<Book>>(this.service.findBooksWithPagesGreaterThan(number), HttpStatus.OK);
+	}
+	
+	@GetMapping("/findBooksByPerson/{id}")
+	public ResponseEntity<List<Book>> findBooksByPerson(@PathVariable Long number){
+		return new ResponseEntity<List<Book>>(this.service.findBooksByPerson(number), HttpStatus.OK);
+	}
+	
+	
+	@PostMapping("/addMultipleBooks")
+	public ResponseEntity<List<Book>> addMultipleBooks(@RequestBody  List<Book> books){
+		for (Book b : books) {
+			this.service.createBook(b);
+		}
+		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
+	}
+	
+	
+	
 }
