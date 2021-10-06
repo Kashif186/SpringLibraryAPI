@@ -19,58 +19,57 @@ import com.qa.main.service.PersonService;
 @RestController
 @RequestMapping("/library")
 public class PersonController {
-	
+
 	private PersonService service;
 
 	public PersonController(PersonService service) {
 		super();
 		this.service = service;
 	}
-	
-	//http://localhost:9003/library/	
-	
-	//CREATE
-		@PostMapping("/createPerson")
-		public ResponseEntity<Person> createPerson(@RequestBody Person Person){
-			return new ResponseEntity<Person>(this.service.createPerson(Person), HttpStatus.CREATED);
-		}
-		
-		
-		//READALL
-		@GetMapping("/getAllPersons")
-		public ResponseEntity<List<Person>> getAllPersons(){
-			return new ResponseEntity<List<Person>>(this.service.getAllPersons(), HttpStatus.OK);
-		}
-		
-		//READ
-		@GetMapping("/getPerson/{id}")
-		public ResponseEntity<Person> getPerson(@PathVariable Long id) {
-			return new ResponseEntity<Person>(this.service.getPerson(id), HttpStatus.OK);
-		}
-		
-		//UPDATE
-		@PutMapping("/updatePerson/{id}")
-		public ResponseEntity<Person> updatePerson(@PathVariable Long id,@RequestBody Person updatedPerson) {
-			return new ResponseEntity<Person>(this.service.updatePerson(id, updatedPerson), HttpStatus.ACCEPTED);
-		}
 
-		//DELETE
-		@DeleteMapping("/deletePerson/{id}")
-		public ResponseEntity<Boolean> deletePerson(@PathVariable Long id) {
-			return new ResponseEntity<Boolean>(this.service.deletePerson(id), HttpStatus.OK);
-		}
+	// http://localhost:9003/library/
+
+	// CREATE
+	@PostMapping("/createPerson")
+	public ResponseEntity<Person> createPerson(@RequestBody Person person) {
+		return new ResponseEntity<Person>(this.service.createPerson(person), HttpStatus.CREATED);
+	}
+
+	// READALL
+	@GetMapping("/getAllPersons")
+	public ResponseEntity<List<Person>> getAllPersons() {
+		return new ResponseEntity<List<Person>>(this.service.getAllPersons(), HttpStatus.OK);
+	}
+
+	// READ
+	@GetMapping("/getPerson/{id}")
+	public ResponseEntity<Person> getPerson(@PathVariable Long id) {
+		return new ResponseEntity<Person>(this.service.getPerson(id), HttpStatus.OK);
+	}
+
+	// UPDATE
+	@PutMapping("/updatePerson/{id}")
+	public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody Person updatedPerson) {
+		return new ResponseEntity<Person>(this.service.updatePerson(id, updatedPerson), HttpStatus.ACCEPTED);
+	}
+
+	// DELETE
+	@DeleteMapping("/deletePerson/{id}")
+	public ResponseEntity<Boolean> deletePerson(@PathVariable Long id) {
+		return new ResponseEntity<Boolean>(this.service.deletePerson(id), HttpStatus.OK);
+	}
+
 	@PostMapping("/addMultiplePeople")
-	public ResponseEntity<List<Person>> addMultiplePeople(@RequestBody  List<Person> people){
+	public ResponseEntity<List<Person>> addMultiplePeople(@RequestBody List<Person> people) {
 		for (Person p : people) {
 			this.service.createPerson(p);
 		}
 		return new ResponseEntity<List<Person>>(people, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/findPeopleWithFinesGreaterThan/{id}")
-	public ResponseEntity<List<Person>> findPeopleWithFinesGreaterThan(@PathVariable double number){
+	public ResponseEntity<List<Person>> findPeopleWithFinesGreaterThan(@PathVariable double number) {
 		return new ResponseEntity<List<Person>>(this.service.findPeopleWithFinesGreaterThan(number), HttpStatus.OK);
 	}
-	
 
 }

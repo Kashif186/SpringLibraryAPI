@@ -106,6 +106,23 @@ public class BookControllerUnitTest {
 				.andExpect(content().string("true"));	
 	}
 	
+	@Test
+	public void findByTitle() throws Exception {	
+		Book book = new Book(1L, "Harry Potter", "J. K. Rowling", 200);
+		
+		List<Book> list = new ArrayList<>();
+
+		list.add(book);
+		
+		String listASJSON = this.mapper.writeValueAsString(list);
+		
+		Mockito.when(this.service.findByTitle("Harry Potter")).thenReturn(list);
+		mvc.perform(get("/library//booktitle/{title}", "Harry Potter"))
+				.andExpect(status().isOk())
+				.andExpect(content().json(listASJSON));	
+	}
+	
+	
 
 
 }

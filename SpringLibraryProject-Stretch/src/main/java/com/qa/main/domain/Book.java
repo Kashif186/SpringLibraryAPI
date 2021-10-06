@@ -48,6 +48,15 @@ public class Book {
 		this.author = author;
 	}
 
+	public Book(Long id, String title, String author, int totalPages, Person person) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.totalPages = totalPages;
+		this.person = person;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.constraints.Size;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import com.qa.main.domain.Book;
+import com.qa.main.domain.Person;
 import com.qa.main.repo.BookRepo;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -95,6 +98,74 @@ public class BookServiceUnitTest {
 		assertEquals(false, this.service.deleteBook(105L));
 		Mockito.verify(this.repo, Mockito.times(1)).existsById(105L);
 	}
+	
+	@Test
+	public void findByTitle() {		
+		Book book = new Book(1L, "Harry Potter", "J. K. Rowling", 200);
+		List<Book> list = new ArrayList<>();
+
+		list.add(book);
+		
+		Mockito.when(this.repo.findByTitle("Harry Potter")).thenReturn(list);
+		assertEquals(list, this.service.findByTitle("Harry Potter"));
+		Mockito.verify(this.repo, Mockito.times(1)).findByTitle("Harry Potter");
+	}
+	
+	@Test
+	public void findBooksWithPagesLessThan() {		
+		Book book = new Book(1L, "Harry Potter", "J. K. Rowling", 200);
+		List<Book> list = new ArrayList<>();
+
+		list.add(book);
+		
+		Mockito.when(this.repo.findBooksWithPagesLessThan(300)).thenReturn(list);
+		assertEquals(list, this.service.findBooksWithPagesLessThan(300));
+		Mockito.verify(this.repo, Mockito.times(1)).findBooksWithPagesLessThan(300);
+	}
+	
+	@Test
+	public void findBooksWithPagesGreaterThan() {		
+		Book book = new Book(1L, "Harry Potter", "J. K. Rowling", 500);
+		List<Book> list = new ArrayList<>();
+
+		list.add(book);
+		
+		Mockito.when(this.repo.findBooksWithPagesGreaterThan(300)).thenReturn(list);
+		assertEquals(list, this.service.findBooksWithPagesGreaterThan(300));
+		Mockito.verify(this.repo, Mockito.times(1)).findBooksWithPagesGreaterThan(300);
+	}
+	
+	@Test
+	public void findBooksByPerson() {		
+		Book book = new Book(1L, "Harry Potter", "J. K. Rowling", 200);
+		Long person_id = 4L;
+		List<Book> list = new ArrayList<>();
+
+		list.add(book);
+		
+		Mockito.when(this.repo.findBooksByPerson(person_id)).thenReturn(list);
+		assertEquals(list, this.service.findBooksByPerson(person_id));
+		Mockito.verify(this.repo, Mockito.times(1)).findBooksByPerson(person_id);
+	}
+	
+	@Test
+	public void loanBook() {		
+		Person person = new Person(4L, "firstName","lastName", 1582645734);
+		Book book = new Book(1L, "Harry Potter", "J. K. Rowling", 200, person);
+		Mockito.when(this.repo.loanBook(1L, 4L)).thenReturn(book);
+		assertEquals(book, this.service.loanBook(1L, 4L));
+		Mockito.verify(this.repo, Mockito.times(1)).loanBook(1L, 4L);
+	}
+	
+	@Test
+	public void returnBook() {		
+
+		Book book = new Book(1L, "Harry Potter", "J. K. Rowling", 200);
+		Mockito.when(this.repo.returnBook(1L)).thenReturn(book);
+		assertEquals(book, this.service.returnBook(1L));
+		Mockito.verify(this.repo, Mockito.times(1)).returnBook(1L);
+	}
+	
 	
 	
 }
