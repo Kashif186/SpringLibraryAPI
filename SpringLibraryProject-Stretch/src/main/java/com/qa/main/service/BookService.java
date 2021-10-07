@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.qa.main.domain.Book;
 import com.qa.main.domain.Person;
 import com.qa.main.dto.BookDTO;
+import com.qa.main.exceptions.BookNotFoundException;
+import com.qa.main.exceptions.PersonNotFoundException;
 import com.qa.main.repo.BookRepo;
 import com.qa.main.repo.PersonRepo;
 
@@ -50,20 +52,24 @@ public class BookService {
 		for (Book b:  this.repo.findAll()) {
 			newList.add(this.mapToDTO(b));
 		};
+		
+		if(newList.size() == 0) {
+			throw new BookNotFoundException();
+		}
 		return newList;
 	}
 	
 	
 	//READ
 	public BookDTO getBook(Long id) {
-		Book book =  this.repo.findById(id).get();
+		Book book =  this.repo.findById(id).orElseThrow(BookNotFoundException::new);
 		return this.mapToDTO(book);
 	}
 	
 
 	//UPDATE
 	public BookDTO updateBook(Long id, Book updatedBook) {
-		Book exists = this.repo.findById(id).get();
+		Book exists = this.repo.findById(id).orElseThrow(BookNotFoundException::new);
 		exists.setTitle(updatedBook.getTitle());
 		exists.setAuthor(updatedBook.getAuthor());
 		exists.setTotalPages(updatedBook.getTotalPages());
@@ -74,6 +80,9 @@ public class BookService {
 	
 	//DELETE
 	public Boolean deleteBook(Long id) {
+		if (!this.repo.existsById(id)) {
+			throw new BookNotFoundException();
+		}
 		this.repo.deleteById(id);
 		return !this.repo.existsById(id);
 	}
@@ -86,6 +95,10 @@ public class BookService {
 		for (Book b:  this.repo.findByTitle(title)) {
 			newList.add(this.mapToDTO(b));
 		};
+		
+		if (newList.size()==0) {
+			throw new BookNotFoundException();
+		}
 		return newList;
 	}
 	
@@ -94,6 +107,11 @@ public class BookService {
 		for (Book b:  this.repo.findBooksWithPagesLessThan(page)) {
 			newList.add(this.mapToDTO(b));
 		};
+		
+		if (newList.size()==0) {
+			throw new BookNotFoundException();
+		}
+		
 		return newList;
 	}
 	
@@ -102,6 +120,11 @@ public class BookService {
 		for (Book b:  this.repo.findBooksWithPagesGreaterThan(page)) {
 			newList.add(this.mapToDTO(b));
 		};
+		
+		if (newList.size()==0) {
+			throw new BookNotFoundException();
+		}
+		
 		return newList;
 	}
 	
@@ -110,6 +133,11 @@ public class BookService {
 		for (Book b:  this.repo.findBooksByPerson(id)) {
 			newList.add(this.mapToDTO(b));
 		};
+		
+		if (newList.size()==0) {
+			throw new BookNotFoundException();
+		}
+		
 		return newList;
 	}
 	
@@ -126,6 +154,14 @@ public class BookService {
 	public BookDTO loanBook(Long bookId, Long personId) {
 		Person p = this.personRepo.findById(personId).get();
 		
+		if (!this.repo.existsById(bookId)) {
+			throw new BookNotFoundException();
+		}
+		
+		if (!this.personRepo.existsById(personId)) {
+			throw new PersonNotFoundException();
+		}
+		
 		if (this.repo.loanBook(bookId, p) == 1) {
 			Book book = this.repo.findById(bookId).get();
 			return this.mapToDTO(book);
@@ -135,6 +171,11 @@ public class BookService {
 	}
 	
 	public BookDTO returnBook(Long bookId) {
+		
+		if (!this.repo.existsById(bookId)) {
+			throw new BookNotFoundException();
+		}
+		
 		if (this.repo.returnBook(bookId) == 1) {
 			Book book = this.repo.findById(bookId).get();
 			return this.mapToDTO(book);

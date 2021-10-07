@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.qa.main.domain.Book;
 import com.qa.main.domain.Person;
-import com.qa.main.dto.BookDTO;
 
 @Repository
 public interface BookRepo extends JpaRepository<Book, Long> {
