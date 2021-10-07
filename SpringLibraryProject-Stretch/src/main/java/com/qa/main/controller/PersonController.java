@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.main.domain.Person;
+import com.qa.main.dto.PersonDTO;
 import com.qa.main.service.PersonService;
 
 @RestController
@@ -31,26 +32,26 @@ public class PersonController {
 
 	// CREATE
 	@PostMapping("/createPerson")
-	public ResponseEntity<Person> createPerson(@RequestBody Person person) {
-		return new ResponseEntity<Person>(this.service.createPerson(person), HttpStatus.CREATED);
+	public ResponseEntity<PersonDTO> createPerson(@RequestBody Person person) {
+		return new ResponseEntity<PersonDTO>(this.service.createPerson(person), HttpStatus.CREATED);
 	}
 
 	// READALL
-	@GetMapping("/getAllPersons")
-	public ResponseEntity<List<Person>> getAllPersons() {
-		return new ResponseEntity<List<Person>>(this.service.getAllPersons(), HttpStatus.OK);
+	@GetMapping("/getAllPeople")
+	public ResponseEntity<List<PersonDTO>> getAllPeople() {
+		return new ResponseEntity<List<PersonDTO>>(this.service.getAllPeople(), HttpStatus.OK);
 	}
 
 	// READ
 	@GetMapping("/getPerson/{id}")
-	public ResponseEntity<Person> getPerson(@PathVariable Long id) {
-		return new ResponseEntity<Person>(this.service.getPerson(id), HttpStatus.OK);
+	public ResponseEntity<PersonDTO> getPerson(@PathVariable Long id) {
+		return new ResponseEntity<PersonDTO>(this.service.getPerson(id), HttpStatus.OK);
 	}
 
 	// UPDATE
 	@PutMapping("/updatePerson/{id}")
-	public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody Person updatedPerson) {
-		return new ResponseEntity<Person>(this.service.updatePerson(id, updatedPerson), HttpStatus.ACCEPTED);
+	public ResponseEntity<PersonDTO> updatePerson(@PathVariable Long id, @RequestBody Person updatedPerson) {
+		return new ResponseEntity<PersonDTO>(this.service.updatePerson(id, updatedPerson), HttpStatus.ACCEPTED);
 	}
 
 	// DELETE
@@ -60,16 +61,13 @@ public class PersonController {
 	}
 
 	@PostMapping("/addMultiplePeople")
-	public ResponseEntity<List<Person>> addMultiplePeople(@RequestBody List<Person> people) {
-		for (Person p : people) {
-			this.service.createPerson(p);
-		}
-		return new ResponseEntity<List<Person>>(people, HttpStatus.OK);
+	public ResponseEntity<List<PersonDTO>> addMultiplePeople(@RequestBody List<Person> people) {
+		return new ResponseEntity<List<PersonDTO>>(this.service.addMultiplePeople(people), HttpStatus.OK);
 	}
 
 	@GetMapping("/findPeopleWithFinesGreaterThan/{id}")
-	public ResponseEntity<List<Person>> findPeopleWithFinesGreaterThan(@PathVariable double number) {
-		return new ResponseEntity<List<Person>>(this.service.findPeopleWithFinesGreaterThan(number), HttpStatus.OK);
+	public ResponseEntity<List<PersonDTO>> findPeopleWithFinesGreaterThan(@PathVariable double number) {
+		return new ResponseEntity<List<PersonDTO>>(this.service.findPeopleWithFinesGreaterThan(number), HttpStatus.OK);
 	}
 
 }

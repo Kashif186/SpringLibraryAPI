@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.main.domain.Book;
-
+import com.qa.main.dto.BookDTO;
 import com.qa.main.service.BookService;
 
 @RestController
@@ -32,27 +32,27 @@ public class BookController {
 	
 	//CREATE
 	@PostMapping("/createBook")
-	public ResponseEntity<Book> createBook(@RequestBody Book book){
-		return new ResponseEntity<Book>(this.service.createBook(book), HttpStatus.CREATED);
+	public ResponseEntity<BookDTO> createBook(@RequestBody Book book){
+		return new ResponseEntity<BookDTO>(this.service.createBook(book), HttpStatus.CREATED);
 	}
 	
 	
 	//READALL
 	@GetMapping("/getAllBooks")
-	public ResponseEntity<List<Book>> getAllBooks(){
-		return new ResponseEntity<List<Book>>(this.service.getAllBooks(), HttpStatus.OK);
+	public ResponseEntity<List<BookDTO>> getAllBooks(){
+		return new ResponseEntity<List<BookDTO>>(this.service.getAllBooks(), HttpStatus.OK);
 	}
 	
 	//READ
 	@GetMapping("/getBook/{id}")
-	public ResponseEntity<Book> getBook(@PathVariable Long id) {
-		return new ResponseEntity<Book>(this.service.getBook(id), HttpStatus.OK);
+	public ResponseEntity<BookDTO> getBook(@PathVariable Long id) {
+		return new ResponseEntity<BookDTO>(this.service.getBook(id), HttpStatus.OK);
 	}
 	
 	//UPDATE
 	@PutMapping("/updateBook/{id}")
-	public ResponseEntity<Book> updateBook(@PathVariable Long id,@RequestBody Book updatedBook) {
-		return new ResponseEntity<Book>(this.service.updateBook(id, updatedBook), HttpStatus.ACCEPTED);
+	public ResponseEntity<BookDTO> updateBook(@PathVariable Long id,@RequestBody Book updatedBook) {
+		return new ResponseEntity<BookDTO>(this.service.updateBook(id, updatedBook), HttpStatus.ACCEPTED);
 	}
 
 	//DELETE
@@ -65,42 +65,40 @@ public class BookController {
 	
 	//FInd By Name
 	@GetMapping("/booktitle/{title}")
-	public ResponseEntity<List<Book>> findByTitle(@PathVariable String title){
-		return new ResponseEntity<List<Book>>(this.service.findByTitle(title), HttpStatus.OK);
+	public ResponseEntity<List<BookDTO>> findByTitle(@PathVariable String title){
+		return new ResponseEntity<List<BookDTO>>(this.service.findByTitle(title), HttpStatus.OK);
 	}
 	
 	@GetMapping("/findBookWithPagesLessThan/{number}")
-	public ResponseEntity<List<Book>> findBooksWithPagesLessThan(@PathVariable int number){
-		return new ResponseEntity<List<Book>>(this.service.findBooksWithPagesLessThan(number), HttpStatus.OK);
+	public ResponseEntity<List<BookDTO>> findBooksWithPagesLessThan(@PathVariable int number){
+		return new ResponseEntity<List<BookDTO>>(this.service.findBooksWithPagesLessThan(number), HttpStatus.OK);
 	}
 	
 	@GetMapping("/findBooksWithPagesGreaterThan/{number}")
-	public ResponseEntity<List<Book>> findBooksWithPagesGreaterThan(@PathVariable int number){
-		return new ResponseEntity<List<Book>>(this.service.findBooksWithPagesGreaterThan(number), HttpStatus.OK);
+	public ResponseEntity<List<BookDTO>> findBooksWithPagesGreaterThan(@PathVariable int number){
+		return new ResponseEntity<List<BookDTO>>(this.service.findBooksWithPagesGreaterThan(number), HttpStatus.OK);
 	}
 	
 	@GetMapping("/findBooksByPerson/{id}")
-	public ResponseEntity<List<Book>> findBooksByPerson(@PathVariable Long number){
-		return new ResponseEntity<List<Book>>(this.service.findBooksByPerson(number), HttpStatus.OK);
+	public ResponseEntity<List<BookDTO>> findBooksByPerson(@PathVariable Long number){
+		return new ResponseEntity<List<BookDTO>>(this.service.findBooksByPerson(number), HttpStatus.OK);
 	}
 	
 	
 	@PostMapping("/addMultipleBooks")
-	public ResponseEntity<List<Book>> addMultipleBooks(@RequestBody  List<Book> books){
-		for (Book b : books) {
-			this.service.createBook(b);
-		}
-		return new ResponseEntity<List<Book>>(books, HttpStatus.OK);
+	public ResponseEntity<List<BookDTO>> addMultipleBooks(@RequestBody  List<Book> books){
+		
+		return new ResponseEntity<List<BookDTO>>(this.service.addMultipleBooks(books), HttpStatus.OK);
 	}
 	
 	@PutMapping("/loanBook/{bookId}/{personId}")
-	public ResponseEntity<Book> loanBook(@PathVariable Long bookId,@PathVariable Long personId) {
-		return new ResponseEntity<Book>(this.service.loanBook(bookId, personId), HttpStatus.ACCEPTED);
+	public ResponseEntity<BookDTO> loanBook(@PathVariable Long bookId,@PathVariable Long personId) {
+		return new ResponseEntity<BookDTO>(this.service.loanBook(bookId, personId), HttpStatus.ACCEPTED);
 	}
 	
 	@PutMapping("/returnBook/{bookId}")
-	public ResponseEntity<Book> returnBook(@PathVariable Long bookId) {
-		return new ResponseEntity<Book>(this.service.returnBook(bookId), HttpStatus.ACCEPTED);
+	public ResponseEntity<BookDTO> returnBook(@PathVariable Long bookId) {
+		return new ResponseEntity<BookDTO>(this.service.returnBook(bookId), HttpStatus.ACCEPTED);
 	}
 	
 	
