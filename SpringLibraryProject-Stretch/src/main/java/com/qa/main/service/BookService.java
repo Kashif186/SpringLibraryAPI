@@ -1,11 +1,15 @@
 package com.qa.main.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.main.domain.Book;
 import com.qa.main.domain.Person;
+import com.qa.main.dto.BookDTO;
 import com.qa.main.repo.BookRepo;
 import com.qa.main.repo.PersonRepo;
 
@@ -14,40 +18,57 @@ public class BookService {
 
 	private BookRepo repo;
 	private PersonRepo personRepo;
+	private ModelMapper mapper;
 	
-	
-	public BookService(BookRepo repo, PersonRepo personRepo) {
+	@Autowired
+	public BookService(BookRepo repo, PersonRepo personRepo, ModelMapper mapper) {
 		super();
 		this.repo = repo;
 		this.personRepo = personRepo;
+		this.mapper = mapper;
 	}
 
+	public BookDTO mapToDTO(Book b) {
+		return this.mapper.map(b, BookDTO.class);
+	}
+	
+	
+	public Book mapFromDTO(BookDTO b) {
+		return this.mapper.map(b, Book.class);
+	}
 
 	//CREATE
-	public Book createBook(Book book) {
-		return this.repo.saveAndFlush(book);
+	public BookDTO createBook(Book book) {
+		this.repo.saveAndFlush(book);
+		return this.mapToDTO(book);
 	}
 
 	
 	//READALL
-	public List<Book> getAllBooks(){
-		return this.repo.findAll();
+	public List<BookDTO> getAllBooks(){
+		List<BookDTO> newList = new ArrayList<BookDTO>();
+		for (Book b:  this.repo.findAll()) {
+			newList.add(this.mapToDTO(b));
+		};
+		return newList;
 	}
 	
 	
 	//READ
-	public Book getBook(Long id) {
-		return this.repo.findById(id).get();
+	public BookDTO getBook(Long id) {
+		Book book =  this.repo.findById(id).get();
+		return this.mapToDTO(book);
 	}
 	
 
 	//UPDATE
-	public Book updateBook(Long id, Book updatedBook) {
+	public BookDTO updateBook(Long id, Book updatedBook) {
 		Book exists = this.repo.findById(id).get();
 		exists.setTitle(updatedBook.getTitle());
 		exists.setAuthor(updatedBook.getAuthor());
 		exists.setTotalPages(updatedBook.getTotalPages());
-		return this.repo.saveAndFlush(exists);
+		this.repo.saveAndFlush(exists);
+		return this.mapToDTO(exists);
 	}
 	
 	
@@ -60,38 +81,63 @@ public class BookService {
 	
 	//STRETCH
 	
-	public List<Book> findByTitle(String title){
-		return this.repo.findByTitle(title);
+	public List<BookDTO> findByTitle(String title){
+		List<BookDTO> newList = new ArrayList<BookDTO>();
+		for (Book b:  this.repo.findByTitle(title)) {
+			newList.add(this.mapToDTO(b));
+		};
+		return newList;
 	}
 	
-	public List<Book> findBooksWithPagesLessThan(int page){
-		return this.repo.findBooksWithPagesLessThan(page);
+	public List<BookDTO> findBooksWithPagesLessThan(int page){
+		List<BookDTO> newList = new ArrayList<BookDTO>();
+		for (Book b:  this.repo.findBooksWithPagesLessThan(page)) {
+			newList.add(this.mapToDTO(b));
+		};
+		return newList;
 	}
 	
-	public List<Book> findBooksWithPagesGreaterThan(int page){
-		return this.repo.findBooksWithPagesGreaterThan(page);
+	public List<BookDTO> findBooksWithPagesGreaterThan(int page){
+		List<BookDTO> newList = new ArrayList<BookDTO>();
+		for (Book b:  this.repo.findBooksWithPagesGreaterThan(page)) {
+			newList.add(this.mapToDTO(b));
+		};
+		return newList;
 	}
 	
-	public List<Book> findBooksByPerson(Long id){
-		return this.repo.findBooksByPerson(id);
+	public List<BookDTO> findBooksByPerson(Long id){
+		List<BookDTO> newList = new ArrayList<BookDTO>();
+		for (Book b:  this.repo.findBooksByPerson(id)) {
+			newList.add(this.mapToDTO(b));
+		};
+		return newList;
 	}
 	
-	public Book loanBook(Long bookId, Long personId) {
+	public List<BookDTO> addMultipleBooks(List<Book> books) {
+		List<BookDTO> dtoList = new ArrayList<BookDTO>();
+		
+		for (Book b : books) {
+			dtoList.add(this.mapToDTO(b));
+		}
+		
+		return dtoList;
+	}
+	
+	public BookDTO loanBook(Long bookId, Long personId) {
 		Person p = this.personRepo.findById(personId).get();
 		
 		if (this.repo.loanBook(bookId, p) == 1) {
-			return this.repo.findById(bookId).get();
+			Book book = this.repo.findById(bookId).get();
+			return this.mapToDTO(book);
 		} else {
 			return null;
 		}
-		
-		
-		
 	}
 	
-	public Book returnBook(Long bookId) {
+	public BookDTO returnBook(Long bookId) {
 		if (this.repo.returnBook(bookId) == 1) {
-			return this.repo.findById(bookId).get();
+			Book book = this.repo.findById(bookId).get();
+			return this.mapToDTO(book);
 		} else {
 			return null; //throw custom exception here
 		}
