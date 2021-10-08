@@ -74,14 +74,14 @@ Jira Borad: https://kashif-butt.atlassian.net/jira/software/projects/SPRIN/board
 GitHub: https://github.com/Kashif186/SpringLibraryProject
 
 
-##Stretch Goals:
+## Stretch Goals:
 
-###ER Diagram - Linked using foreign key
+### ER Diagram - Linked using foreign key
 
 ![ER Diagram](/Documentation/ER-Diagram.png)
 
 
-###Custom Exceptions:
+### Custom Exceptions:
 
 Book Not Found:
 
