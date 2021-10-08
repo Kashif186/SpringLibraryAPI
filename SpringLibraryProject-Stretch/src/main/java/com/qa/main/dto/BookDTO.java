@@ -19,7 +19,24 @@ public class BookDTO {
 		this.author = author;
 		this.totalPages = totalPages;
 		this.person = person;
+	}
+
+	public BookDTO(String title, String author, int totalPages) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.totalPages = totalPages;
+	}
+
+	public BookDTO(Long id, String title, String author, int totalPages) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.totalPages = totalPages;
 	} 
+	
+	
 	
 	
 	

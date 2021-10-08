@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -19,6 +20,7 @@ public class PersonService {
 	private PersonRepo repo;
 	private ModelMapper mapper;
 
+	@Autowired
 	public PersonService(PersonRepo repo, ModelMapper mapper) {
 		super();
 		this.repo = repo;
@@ -62,7 +64,7 @@ public class PersonService {
 
 	// UPDATE
 	public PersonDTO updatePerson(Long id, Person updatedPerson) {
-		Person exists = this.repo.findById(id).orElseThrow(BookNotFoundException::new);
+		Person exists = this.repo.findById(id).orElseThrow(PersonNotFoundException::new);
 		exists.setFirstName(updatedPerson.getFirstName());
 		exists.setLastName(updatedPerson.getLastName());
 		this.repo.saveAndFlush(exists);
@@ -97,6 +99,7 @@ public class PersonService {
 		List<PersonDTO> dtoList = new ArrayList<PersonDTO>();
 
 		for (Person p : people) {
+			this.repo.saveAndFlush(p);
 			dtoList.add(this.mapToDTO(p));
 		}
 

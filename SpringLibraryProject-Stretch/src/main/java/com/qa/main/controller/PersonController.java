@@ -65,7 +65,7 @@ public class PersonController {
 		return new ResponseEntity<List<PersonDTO>>(this.service.addMultiplePeople(people), HttpStatus.OK);
 	}
 
-	@GetMapping("/findPeopleWithFinesGreaterThan/{id}")
+	@GetMapping("/findPeopleWithFinesGreaterThan/{number}")
 	public ResponseEntity<List<PersonDTO>> findPeopleWithFinesGreaterThan(@PathVariable double number) {
 		return new ResponseEntity<List<PersonDTO>>(this.service.findPeopleWithFinesGreaterThan(number), HttpStatus.OK);
 	}

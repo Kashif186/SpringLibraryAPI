@@ -2,6 +2,9 @@ package com.qa.main.controller;
 
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -64,8 +67,8 @@ public class BookController {
 	//STRETCH
 	
 	//FInd By Name
-	@GetMapping("/booktitle/{title}")
-	public ResponseEntity<List<BookDTO>> findByTitle(@PathVariable String title){
+	@GetMapping("/booktitle")
+	public ResponseEntity<List<BookDTO>> findByTitle(@PathParam(value = "title") String title){
 		return new ResponseEntity<List<BookDTO>>(this.service.findByTitle(title), HttpStatus.OK);
 	}
 	
@@ -80,8 +83,8 @@ public class BookController {
 	}
 	
 	@GetMapping("/findBooksByPerson/{id}")
-	public ResponseEntity<List<BookDTO>> findBooksByPerson(@PathVariable Long number){
-		return new ResponseEntity<List<BookDTO>>(this.service.findBooksByPerson(number), HttpStatus.OK);
+	public ResponseEntity<List<BookDTO>> findBooksByPerson(@PathVariable Long id){
+		return new ResponseEntity<List<BookDTO>>(this.service.findBooksByPerson(id), HttpStatus.OK);
 	}
 	
 	
