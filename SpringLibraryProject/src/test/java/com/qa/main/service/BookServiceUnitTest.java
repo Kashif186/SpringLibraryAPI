@@ -70,7 +70,7 @@ public class BookServiceUnitTest {
 		Book book2 = new Book(1L, "Potter", "Rowling", 100);
 		Long id = book.getId();
 		
-		Optional<Book> bookOptional = Optional.ofNullable(new Book(1L, "Harry Potter", "J. K. Rowling", 200));
+		Optional<Book> bookOptional = Optional.of(new Book(1L, "Harry Potter", "J. K. Rowling", 200));
 		
 		Mockito.when(this.repo.findById(id)).thenReturn(bookOptional);
 		Mockito.when(this.repo.saveAndFlush(book)).thenReturn(book2);

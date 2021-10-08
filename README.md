@@ -13,7 +13,7 @@ I expected the challenge to go well as the MVP was covered in our training so I 
 
 Setting up the classes such as domain, repo, services and controller went really well. I had no issues here. However, I ran into a lot of issues with testing and received a lot of bugs. I had to research these and see what I was doing wrong but managed to solve them all in the end.
 
-Testing will be a lot easier in the future as I have become familiar with the bugs that I encountered. I could add more tables to my project and expand the usage of the application as a whole. Also, I could learn about implementing a front end and linking it to my project.
+Testing will be a lot easier in the future as I have become familiar with the bugs that I encountered. I could add more tables to my project and expand the usage of the application as a whole. I still need to conduct testing for the stretch goals but did not have enough time for this. Also, I could learn about implementing a front end and linking it to my project.
 
 ## Create:
 On Postman:
@@ -72,3 +72,59 @@ Service Unit Test:
 Jira Borad: https://kashif-butt.atlassian.net/jira/software/projects/SPRIN/boards/1
 
 GitHub: https://github.com/Kashif186/SpringLibraryProject
+
+
+##Stretch Goals:
+
+###ER Diagram - Linked using foreign key
+
+![ER Diagram](/documentation/ER-Diagram.png)
+
+
+###Custom Exceptions:
+
+Book Not Found:
+
+![Book Not Found](/images/BookNotFound.png)
+
+Person Not Found
+
+![Person Not Found](/images/PersonNotFound.png)
+
+###Custom Queries:
+
+Add Multiple Books:
+
+![Add Multiple Books](/images/AddMultipleBooks.png)
+
+![workbench - Add Multiple Books](/images/workbench-AddMultipleBooks.png)
+
+Search by Book Title:
+
+![Book Title Search](/images/bookTitle.png)
+
+Loan Book:
+
+![Loan Book](/images/LoanBook.png)
+
+![workbench - Loan Book](/images/workbench-LoanBook.png)
+
+Return Book:
+
+![Return Book](/images/ReturnBook.png)
+
+![workbench - Return Book](/images/workbench-ReturnBook.png)
+
+Find Books Taken Out By One Person:
+
+![Person Books](/images/PersonBooks.png)
+
+Add People:
+
+![Add People](/images/AddPeople.png)
+
+![workbench - Add People](/images/workbench-AddPeople.png)
+
+Find People With Fines Above A Certain Amount:
+
+![Find Fines](/images/PeopleFines.png)
