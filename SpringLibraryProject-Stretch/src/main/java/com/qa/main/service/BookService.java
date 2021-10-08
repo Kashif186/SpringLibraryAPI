@@ -34,10 +34,6 @@ public class BookService {
 		return this.mapper.map(b, BookDTO.class);
 	}
 	
-	
-	public Book mapFromDTO(BookDTO b) {
-		return this.mapper.map(b, Book.class);
-	}
 
 	//CREATE
 	public BookDTO createBook(Book book) {
@@ -145,6 +141,7 @@ public class BookService {
 		List<BookDTO> dtoList = new ArrayList<BookDTO>();
 		
 		for (Book b : books) {
+			this.repo.saveAndFlush(b);
 			dtoList.add(this.mapToDTO(b));
 		}
 		
@@ -153,7 +150,7 @@ public class BookService {
 	
 	public BookDTO loanBook(Long bookId, Long personId) {
 		Person p = this.personRepo.findById(personId).get();
-		
+
 		if (!this.repo.existsById(bookId)) {
 			throw new BookNotFoundException();
 		}

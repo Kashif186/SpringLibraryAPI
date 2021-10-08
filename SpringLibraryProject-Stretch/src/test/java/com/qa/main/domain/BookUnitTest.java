@@ -7,7 +7,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 
@@ -39,6 +38,19 @@ public class BookUnitTest {
 	}
 	
 	@Test
+	public void bookcontructor4() {
+		Book b = new Book("Harry Potter", "J. K. Rowling", 200);
+		assertEquals(b, new Book("Harry Potter", "J. K. Rowling", 200));
+	}
+	
+	@Test
+	public void bookcontructor5() {
+		Person p = new Person(1L, "first name", "last name");
+		Book b = new Book(1L, "Harry Potter", "J. K. Rowling", 200, p);
+		assertEquals(b, new Book(1L, "Harry Potter", "J. K. Rowling", 200, p));
+	}
+	
+	@Test
 	public void getId() {
 		Book b = new Book(1L, "Harry Potter", "J. K. Rowling",200);
 		assertEquals(1L, b.getId(),0);
@@ -62,6 +74,12 @@ public class BookUnitTest {
 		assertEquals(200, b.getTotalPages());
 	}
 	
+	@Test
+	public void getPerson() {
+		Person p = new Person(1L, "first name", "last name");
+		Book b = new Book(1L, "Harry Potter", "J. K. Rowling",200, p);
+		assertEquals(p, b.getPerson());
+	}
 	
 	@Test
 	public void setId() {
@@ -92,6 +110,14 @@ public class BookUnitTest {
 	}
 	
 	@Test
+	public void setPerson() {
+		Person p = new Person(1L, "first name", "last name");
+		Book b = new Book(1L, "Harry Potter", "J. K. Rowling",200);
+		b.setPerson(p);
+		assertEquals(p, b.getPerson());
+	}
+	
+	@Test
 	public void testEquals() {
 		EqualsVerifier.forClass(Book.class)
 			.suppress(Warning.NONFINAL_FIELDS)
@@ -101,8 +127,9 @@ public class BookUnitTest {
 	
 	@Test
 	public void tostring() {
-		Book b = new Book(1L, "Harry Potter", "J. K. Rowling",200);
-		assertEquals("Book [id=1, title=Harry Potter, author=J. K. Rowling, totalPages=200]", b.toString());
+		Person p = new Person(1L, "first name", "last name");
+		Book b = new Book(1L, "Harry Potter", "J. K. Rowling",200, p);
+		assertEquals("Book [id=1, title=Harry Potter, author=J. K. Rowling, totalPages=200, person=" + p + "]", b.toString());
 	}
 
 }

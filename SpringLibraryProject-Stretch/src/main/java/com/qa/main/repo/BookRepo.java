@@ -15,7 +15,7 @@ import com.qa.main.domain.Person;
 @Repository
 public interface BookRepo extends JpaRepository<Book, Long> {
 	
-	@Query(value = "SELECT * FROM Book WHERE title LIKE '%?1%'", nativeQuery =true)
+	@Query(value = "SELECT * FROM Book WHERE title LIKE %:title%", nativeQuery =true)
 	List<Book> findByTitle(String title);
 	
 	@Query(value = "SELECT * FROM Book WHERE author=?1", nativeQuery =true)
