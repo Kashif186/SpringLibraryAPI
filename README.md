@@ -123,7 +123,7 @@ Add People:
 
 ![Add People](/images/AddPeople.png)
 
-![workbench - Add People](/images/workbench - AddPeople.png)
+![workbench - Add People](/images/workbench-AddPeople.png)
 
 Find People With Fines Above A Certain Amount:
 
