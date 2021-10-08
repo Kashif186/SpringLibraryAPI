@@ -78,7 +78,7 @@ GitHub: https://github.com/Kashif186/SpringLibraryProject
 
 ###ER Diagram - Linked using foreign key
 
-![ER Diagram](/documentation/ER-Diagram.png)
+![ER Diagram](/Documentation/ER-Diagram.png)
 
 
 ###Custom Exceptions:
